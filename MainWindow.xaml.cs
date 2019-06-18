@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -12,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.WebRequestMethods;
 
 namespace MusicWPF
 {
@@ -29,7 +34,47 @@ namespace MusicWPF
         {
             var type = this.Type.SelectedItem;
 
-            var keyword = this.keyword.Text;
+            var keyword = this.KeyWord.Text;
+
+            HttpRequestHelper httpRequestHelper = new HttpRequestHelper();
+
+            var url = "https://v1.itooi.cn/tencent/songList?id=2988265977&pageSize=3&page=1&format=1";
+
+            var request = httpRequestHelper.HttpGet(url, "");
+            var data = JsonConvert.DeserializeObject<Request>(request);
+
+            foreach (var music in data.Data)
+            {
+                httpRequestHelper.Download(music.Url, $"d:\\{music.Name}.mp3");
+            }
         }
+
+        public class Request
+        {
+            public string Msg { get; set; }
+
+            public string TimeStamp { get; set; }
+
+             public string Code { get; set; }
+
+            public List<Music> Data { get; set; }
+        }
+
+        public class Music
+        {
+            public string Singer { get; set; }
+
+            public string Name { get; set; }
+
+            public string Time { get; set; }
+
+            public string Pic { get; set; }
+
+            public string Lrc { get; set;}
+            public string Url { get; set; }
+
+        }
+
+
     }
 }

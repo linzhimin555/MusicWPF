@@ -14,7 +14,7 @@
             <ComboBoxItem Content="歌名" HorizontalAlignment="Left" Width="133"/>
             <ComboBoxItem Content="专辑" HorizontalAlignment="Left" Width="133"/>
         </ComboBox>
-        <TextBox Name="keyword" HorizontalAlignment="Left" Height="29" Margin="283,85,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="253"/>
+        <TextBox Name="KeyWord" HorizontalAlignment="Left" Height="29" Margin="283,85,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="253"/>
 
     </Grid>
 </Window>
