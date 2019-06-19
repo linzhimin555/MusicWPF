@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -27,14 +28,38 @@ namespace MusicWPF
     {
         public MainWindow()
         {
+            this.Type.DataContext = SearchType.Album;
             InitializeComponent();
         }
+
+        public enum SearchType
+        {
+            SongList=0,
+            Singer =1,
+            SongName=2,
+            Album=3,
+        }
+            
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var type = this.Type.SelectedItem;
 
             var keyword = this.KeyWord.Text;
+
+            switch (type)
+            {
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+            }
+                
 
             HttpRequestHelper httpRequestHelper = new HttpRequestHelper();
 
@@ -46,7 +71,7 @@ namespace MusicWPF
             this.DataList.DataContext = data.Data;
             foreach (var music in data.Data)
             {
-                httpRequestHelper.Download($"{music.Url}&quality=flac", $"d:\\{music.Name}.flac");
+                httpRequestHelper.Download($"{music.Url}&quality=flac", $"d:\\Music\\{music.Name}.flac");
             }
         }
 
