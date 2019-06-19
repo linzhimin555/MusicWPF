@@ -8,13 +8,21 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Button Content="查询" HorizontalAlignment="Left" Margin="570,85,0,0" VerticalAlignment="Top" Width="96" Height="29" Click="Button_Click"/>
-        <ComboBox Name="Type" HorizontalAlignment="Left" Margin="116,85,0,0" VerticalAlignment="Top" Width="135" Height="29">
-            <ComboBoxItem Content="歌单" Margin="2,0,-2,0" HorizontalAlignment="Left" Width="133"/>
-            <ComboBoxItem Content="歌手" HorizontalAlignment="Left" Width="133"/>
-            <ComboBoxItem Content="歌名" HorizontalAlignment="Left" Width="133"/>
-            <ComboBoxItem Content="专辑" HorizontalAlignment="Left" Width="133"/>
+        <ComboBox Name="Type" HorizontalAlignment="Left" Margin="195,85,0,0" VerticalAlignment="Top" Width="56" Height="29">
+            <ComboBoxItem Content="歌单" IsSelected="True" Margin="2,0,-2,0" HorizontalAlignment="Center" Width="133"/>
+            <ComboBoxItem Content="歌手" HorizontalAlignment="Center" Width="133"/>
+            <ComboBoxItem Content="歌名" HorizontalAlignment="Center" Width="133"/>
+            <ComboBoxItem Content="专辑" HorizontalAlignment="Center" Width="133"/>
         </ComboBox>
-        <TextBox Name="KeyWord" HorizontalAlignment="Left" Height="29" Margin="283,85,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="253"/>
+        <TextBox Name="KeyWord" Text="2988265977" HorizontalAlignment="Left" Height="29" Margin="283,85,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="253"/>
+        <DataGrid Name="DataList" ItemsSource="{Binding}" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="236" Margin="283,139,0,0" VerticalAlignment="Top" Width="260" SelectionChanged="DataList_SelectionChanged">
+            <DataGrid.Columns>
+                <!--<DataGridCheckBoxColumn Header=""  Binding="{Binding Url}"/>-->
+                <DataGridTextColumn Header="歌手" Binding="{Binding Singer}"/>
+                <DataGridTextColumn Header="歌名" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="链接" Binding="{Binding Url}"/>
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </Window>

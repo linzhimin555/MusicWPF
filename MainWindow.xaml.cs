@@ -38,14 +38,15 @@ namespace MusicWPF
 
             HttpRequestHelper httpRequestHelper = new HttpRequestHelper();
 
-            var url = "https://v1.itooi.cn/tencent/songList?id=2988265977&pageSize=3&page=1&format=1";
+            var url = $"https://v1.itooi.cn/tencent/songList?id={keyword}&pageSize=3&page=1&format=1";
 
             var request = httpRequestHelper.HttpGet(url, "");
             var data = JsonConvert.DeserializeObject<Request>(request);
 
+            this.DataList.DataContext = data.Data;
             foreach (var music in data.Data)
             {
-                httpRequestHelper.Download(music.Url, $"d:\\{music.Name}.mp3");
+                httpRequestHelper.Download($"{music.Url}&quality=flac", $"d:\\{music.Name}.flac");
             }
         }
 
@@ -71,10 +72,14 @@ namespace MusicWPF
             public string Pic { get; set; }
 
             public string Lrc { get; set;}
+
             public string Url { get; set; }
 
         }
 
+        private void DataList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
+        }
     }
 }
